@@ -5,9 +5,7 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 3000
 
-// app.use(cors({
-//   origin:['http://localhost:5173/', 'https://grand-jelly-06773e.netlify.app/', "https://forest-canvas-server-3h55by99a-wasim-hossains-projects.vercel.app"]
-// }))
+
 const corsOptions = {
   origin: "*",
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS" ],
@@ -19,7 +17,6 @@ app.options("*",cors(corsOptions))
 app.use(express.json())
 
 
-// const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.db_user}:${process.env.db_pass}@cluster0.r95emnj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -104,20 +101,17 @@ async function run() {
 
     app.post('/foods', async(req, res)=>{
       const foodData = req.body;
-      // console.log(foodData);
       const result = await UserFoodDataCollection.insertOne(foodData)
       res.send(result)
     })
     
     app.post('/userChoice', async(req, res)=>{
       const galleryData = req.body;
-      // console.log(foodData);
       const result = await GalleryDataCollection.insertOne(galleryData)
       res.send(result)
     })
     app.post('/purchases', async(req, res)=>{
       const purchasesData = req.body;
-      // console.log(foodData);
       const result = await PurchasesDataCollection.insertOne(purchasesData);
       res.send(result)
     })
