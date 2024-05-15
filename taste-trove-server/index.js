@@ -115,7 +115,7 @@ async function run() {
       const result = await GalleryDataCollection.insertOne(galleryData)
       res.send(result)
     })
-    app.post('/purchases', async(req, res)=>{
+    app.post('/purchase', async(req, res)=>{
       const purchasesData = req.body;
       // console.log(foodData);
       const result = await PurchasesDataCollection.insertOne(purchasesData);
