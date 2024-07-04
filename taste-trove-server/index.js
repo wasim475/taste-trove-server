@@ -12,6 +12,17 @@ const corsOptions = {
   allowedHeaders:["Content-Type"]
 };
 
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5173",
+//       "taste-trove-a11d5.web.app",
+//       "https://sunny-trifle-93dcec.netlify.app/",
+//     ],
+//     credentials: true,
+//   })
+// );
+
 app.use(cors(corsOptions));
 app.options("*",cors(corsOptions))
 app.use(express.json())
@@ -40,6 +51,12 @@ async function run() {
       const result = await cursor.toArray()
       res.send(result)
    
+    })
+
+    app.post('/foods', async(req, res)=>{
+      const foodData = req.body;
+      const result = await UserFoodDataCollection.insertOne(foodData)
+      res.send(result)
     })
 
  
@@ -99,11 +116,7 @@ async function run() {
   })
 
 
-    app.post('/foods', async(req, res)=>{
-      const foodData = req.body;
-      const result = await UserFoodDataCollection.insertOne(foodData)
-      res.send(result)
-    })
+    
     
     app.post('/userChoice', async(req, res)=>{
       const galleryData = req.body;
